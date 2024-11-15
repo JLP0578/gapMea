@@ -116,7 +116,7 @@ void customGraphicsView::dragMoveEvent(QDragMoveEvent *event)
  }
 
 void customGraphicsView::dropEvent(QDropEvent *event)
-{  qDebug()<<"void customGraphicsView::dropEvent(QDropEvent *event)"<<endl;
+{  qDebug()<<"void customGraphicsView::dropEvent(QDropEvent *event)"<<Qt::endl;
    QPointF lePointMapp=this->mapToScene(event->pos());
    QPoint  lePointMappe=lePointMapp.toPoint();
     if(event->source()->objectName()=="listWidgetTables")

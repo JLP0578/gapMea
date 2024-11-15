@@ -85,7 +85,7 @@ LienReflexif::LienReflexif(Entite *qg1, Entite *qg2, QGraphicsItem *parent, QStr
         //le texte (CIF ou DF)
         leTexteDuRond=new QGraphicsTextItem(leRond);
         //determination diametre du rond
-        int diametre=QFontMetrics(leTexteDuRond->font()).width(" CIF ");
+        int diametre=QFontMetrics(leTexteDuRond->font()).horizontalAdvance(" CIF ");
         QPoint position=boundingRect().center().toPoint();
         position.setX(position.x()-diametre/2);
         leRond->setRect(position.x(),position.y(),diametre,diametre);
@@ -93,7 +93,7 @@ LienReflexif::LienReflexif(Entite *qg1, Entite *qg2, QGraphicsItem *parent, QStr
         leTexteDuRond->setHtml(typ.toUpper().left(3));
         //position du texte
         QPoint positionTexte=boundingRect().center().toPoint();
-        positionTexte.setX(positionTexte.x()-QFontMetrics(leTexteDuRond->font()).width(" CIF ")/2);
+        positionTexte.setX(positionTexte.x()-QFontMetrics(leTexteDuRond->font()).horizontalAdvance(" CIF ")/2);
         leTexteDuRond->setPos(positionTexte);
         leTexteDuRond->setDefaultTextColor(Qt::black);
         //les cardinalites
@@ -103,7 +103,7 @@ LienReflexif::LienReflexif(Entite *qg1, Entite *qg2, QGraphicsItem *parent, QStr
     }//fin de si c'est une df une cif ou une entité faible
     else//c'est soit une patte soit une association
     {
-        qDebug()<<"ERREUR reflexive non DF"<<endl;
+        qDebug()<<"ERREUR reflexive non DF"<<Qt::endl;
 
     }
 }
@@ -118,7 +118,7 @@ void LienReflexif::calculeCoordonnees()
     int nbLiensEntreT1EtT2=4;
     int ordonnee=diametreRond*(nbLiensEntreT1EtT2-(noLien/2));
 
-    qDebug()<<"no du lien:"<<noLien<<endl;
+    qDebug()<<"no du lien:"<<noLien<<Qt::endl;
 
     //répartir en fonction du nb de lien
     //calculs dans t1
@@ -170,7 +170,7 @@ void LienReflexif::calculeCoordonnees()
         role->setPos(depart);
         role->setRotation(-1+firstLine->line().angle());
     }
-    qDebug()<<"FIN calcul coordonnees"<<endl;
+    qDebug()<<"FIN calcul coordonnees"<<Qt::endl;
 
 }
 

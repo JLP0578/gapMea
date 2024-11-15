@@ -76,7 +76,7 @@ void Entite::setNomEntite(QString nouveauNom)
 
 QVariant Entite::itemChange(GraphicsItemChange change,const QVariant &value)
 {
-    qDebug()<<"QVariant Entite::itemChange(GraphicsItemChange change,const QVariant &value)"<<endl;
+    qDebug()<<"QVariant Entite::itemChange(GraphicsItemChange change,const QVariant &value)"<<Qt::endl;
     if (change == ItemPositionHasChanged) {
         foreach (Lien *link, vectLiens)
         {
@@ -89,13 +89,13 @@ QVariant Entite::itemChange(GraphicsItemChange change,const QVariant &value)
 }
 void Entite::redraw()
 {
-    qDebug()<<"void Entite::redraw()"<<endl;
+    qDebug()<<"void Entite::redraw()"<<Qt::endl;
     //calcul de la largeur et de la hauteur;
     long hauteur=20+QFontMetrics(title->font()).height()*(vecteurChamps.size()+2);
-    long largeur=QFontMetrics(title->font()).width(nomTableTronque())+20;
+    long largeur=QFontMetrics(title->font()).horizontalAdvance(nomTableTronque())+20;
     for(int noChamp=0;noChamp<vecteurChamps.count();noChamp++)
     {
-        long largeurDuChamp=QFontMetrics(title->font()).width(vecteurChamps[noChamp]->getNomComplet())+20;
+        long largeurDuChamp=QFontMetrics(title->font()).horizontalAdvance(vecteurChamps[noChamp]->getNomComplet())+20;
         if (largeurDuChamp>largeur) largeur=largeurDuChamp;
     }
 
@@ -159,7 +159,7 @@ int Entite::noLien(Entite* lAutre, Lien* unLien)
 }
 int Entite::nbLien(Entite* lAutre)
 {
-    qDebug()<<"int Entite::nbLien(Entite* lAutre)"<<endl;
+    qDebug()<<"int Entite::nbLien(Entite* lAutre)"<<Qt::endl;
     int resultat=0;
     foreach (Lien* leLien, vectLiens)
     {
@@ -193,10 +193,10 @@ association=isAssoc;
     long hauteur=20;//marge haut + basse
     hauteur+=QFontMetrics(title->font()).height();
     int marge=20;
-    long largeurMaxi=QFontMetrics(title->font()).width(nomTableTronque()+marge);
+    long largeurMaxi=QFontMetrics(title->font()).horizontalAdvance(nomTableTronque()+QChar::fromLatin1(marge));
     for(int noChamp=0;noChamp<listeDesChamps.count();noChamp++)
     {
-        long largeurDuChamp=QFontMetrics(title->font()).width(listeDesChamps[noChamp]+nomEntite);
+        long largeurDuChamp=QFontMetrics(title->font()).horizontalAdvance(listeDesChamps[noChamp]+nomEntite);
         hauteur+=QFontMetrics(title->font()).height();
         if (largeurDuChamp>largeurMaxi) largeurMaxi=largeurDuChamp;
     }
@@ -213,12 +213,12 @@ association=isAssoc;
     //stockage de quelques infos
     //c'est une table
     title->setData(32,"Table");
-    title->setData(34,qVariantFromValue((qlonglong)this));
+    title->setData(34,QVariant::fromValue((qlonglong)this));
     //on stocke son nom
     title->setData(33,nomEntite);
     QGraphicsItem::setData(32,"Table");
     QGraphicsItem::setData(33,nomEntite);
-    QGraphicsItem::setData(34,qVariantFromValue((qlonglong)this));
+    QGraphicsItem::setData(34,QVariant::fromValue((qlonglong)this));
     long ordonne=title->boundingRect().height();
 
     this->setRect(0,0,largeurMaxi+10,ordonne+10);
@@ -301,7 +301,7 @@ association=isAssoc;
 
 QVector<Entite*> Entite::renvoieEntiteMeres()
 {
-    qDebug()<<"QVector<Entite*> Entite::renvoieEntiteMeres()"<<endl;
+    qDebug()<<"QVector<Entite*> Entite::renvoieEntiteMeres()"<<Qt::endl;
     QVector<Entite*> resultat;
     foreach (Lien* leLien, vectLiens)
     {
@@ -317,7 +317,7 @@ QVector<Entite*> Entite::renvoieEntiteMeres()
 }
 QStringList Entite::renvoieChampsEtrangers()
 {
-    qDebug()<<"QStringList Entite::renvoieChampsEtrangers()"<<endl;
+    qDebug()<<"QStringList Entite::renvoieChampsEtrangers()"<<Qt::endl;
     QStringList resultat;
 
     foreach (Lien* leLien, vectLiens)
@@ -364,7 +364,7 @@ QStringList Entite::renvoieChampsEtrangers()
 }
 QStringList Entite::renvoieClefsEtrangeres(bool constraintInsideTable)
 {
-    qDebug()<<"QStringList Entite::renvoieClefsEtrangeres(bool constraintInsideTable)"<<endl;
+    qDebug()<<"QStringList Entite::renvoieClefsEtrangeres(bool constraintInsideTable)"<<Qt::endl;
     QStringList resultat;
     QString debut="";
     if(!constraintInsideTable)debut="ALTER TABLE "+nomEntite+" ADD ";
@@ -392,7 +392,7 @@ QStringList Entite::renvoieClefsEtrangeres(bool constraintInsideTable)
 }
 bool Entite::canBeWriten(QVector <Entite*>vectEntitesGeneres)
 {
-    qDebug()<<"bool Entite::canBeWriten(QVector <Entite*>vectEntitesGeneres)"<<endl;
+    qDebug()<<"bool Entite::canBeWriten(QVector <Entite*>vectEntitesGeneres)"<<Qt::endl;
     bool resultat=true;
     foreach (Lien* leLien, vectLiens)
     {
@@ -422,7 +422,7 @@ bool Entite::isEntiteFaible()
 
 QString Entite::getPrimaryKey()
 {
-qDebug()<<"QString Entite::getPrimaryKey()"<<endl;
+qDebug()<<"QString Entite::getPrimaryKey()"<<Qt::endl;
     if(!association)
     {
 
@@ -478,7 +478,7 @@ qDebug()<<"QString Entite::getPrimaryKey()"<<endl;
 
 QString Entite::getPrimaryKeyAsFields()
 {
-    qDebug()<<"QString Entite::getPrimaryKeyAsFields()"<<endl;
+    qDebug()<<"QString Entite::getPrimaryKeyAsFields()"<<Qt::endl;
     QString chObligatoire=" NOT NULL";
     if(!association)
     {
@@ -539,7 +539,7 @@ QString Entite::getPrimaryKeyAsFields()
 }
 QString Entite::getkeyAsForeignKey(QString role)
 {
-    qDebug()<<"QString Entite::getkeyAsForeignKey(QString role)"<<endl;
+    qDebug()<<"QString Entite::getkeyAsForeignKey(QString role)"<<Qt::endl;
     QString motReserve="#ad2bee";
     QString typeChamp="#87711d";
     QString nomTable="#29a329";

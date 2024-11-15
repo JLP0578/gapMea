@@ -92,11 +92,11 @@ void QCustomGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 QDrag *drag = new QDrag(((QWidget*)this->parent()));
                 QMimeData *mimeData = new QMimeData;
                 QByteArray qba;
-                qba.append(elt->data(32).toString());
+                qba.append(elt->data(32).toString().toUtf8());
                 qba.append(";");
-                qba.append(elt->data(33).toString());
+                qba.append(elt->data(33).toString().toUtf8());
                 qba.append(";");
-                qba.append(elt->data(34).toString());
+                qba.append(elt->data(34).toString().toUtf8());
                 mimeData->setData("text/"+elt->data(32).toString(),qba);
                 drag->setMimeData(mimeData);
                 //drag->setPixmap(iconPixmap);

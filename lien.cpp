@@ -85,7 +85,7 @@ Lien::Lien(Entite* pt1,Entite* pt2,QGraphicsItem * parent,QString typ, QString r
         //le texte (CIF ou DF)
         leTexteDuRond=new QGraphicsTextItem(leRond);
         //determination diametre du rond
-        int diametre=QFontMetrics(leTexteDuRond->font()).width(" CIF ");
+        int diametre=QFontMetrics(leTexteDuRond->font()).horizontalAdvance(" CIF ");
         QPoint position=boundingRect().center().toPoint();
         position.setX(position.x()-diametre/2);
         leRond->setRect(position.x(),position.y(),diametre,diametre);
@@ -93,7 +93,7 @@ Lien::Lien(Entite* pt1,Entite* pt2,QGraphicsItem * parent,QString typ, QString r
         leTexteDuRond->setHtml(typ.toUpper().left(3));
         //position du texte
         QPoint positionTexte=boundingRect().center().toPoint();
-        positionTexte.setX(positionTexte.x()-QFontMetrics(leTexteDuRond->font()).width(" CIF ")/2);
+        positionTexte.setX(positionTexte.x()-QFontMetrics(leTexteDuRond->font()).horizontalAdvance(" CIF ")/2);
         leTexteDuRond->setPos(positionTexte);
         leTexteDuRond->setDefaultTextColor(Qt::black);
         //les cardinalites
@@ -168,7 +168,7 @@ Lien::Lien(Entite* pt1,Entite* pt2,QGraphicsItem * parent,QString typ, QString r
             }//fin du si c'est une association
             else
             {
-                qDebug()<<"ERREUR TYPE DE RELATION INCONNU"<<endl;
+                qDebug()<<"ERREUR TYPE DE RELATION INCONNU"<<Qt::endl;
             }
         }//fin du ce n'est pas une patte
     } //fin du "c'est soit une patte soit une association"
@@ -323,7 +323,7 @@ void Lien::calculeCoordonnees()
         p2 = endPolygon.at(i)+t2->pos();
         polyLine = QLineF(p1, p2);
         QLineF::IntersectType intersectType =
-                polyLine.intersect(centerLine, &intersectPointT2);
+                polyLine.intersects(centerLine, &intersectPointT2);
         //s'il y a intersection
         if (intersectType == QLineF::BoundedIntersection)
         {
@@ -341,7 +341,7 @@ void Lien::calculeCoordonnees()
         p2 = beginPolygon.at(i)+t1->pos();
         polyLine = QLineF(p1, p2);
         QLineF::IntersectType intersectType =
-                polyLine.intersect(centerLine, &intersectPointT1);
+                polyLine.intersects(centerLine, &intersectPointT1);
         if (intersectType == QLineF::BoundedIntersection)
             break;
         p1 = p2;
@@ -359,7 +359,7 @@ void Lien::calculeCoordonnees()
     {
         intersectPointT1=origine;
         intersectPointT2=destination;
-        qDebug()<<"DEDANS************"<<endl;
+        qDebug()<<"DEDANS************"<<Qt::endl;
         this->setEnabled(false);
         this->hide();
     }
@@ -486,7 +486,7 @@ void Lien::calculeCoordonnees()
         if(role!=NULL)role->setPos(posRole);
     }//fin du else
 
-    qDebug()<<"FIN calcul coordonnees"<<endl;
+    qDebug()<<"FIN calcul coordonnees"<<Qt::endl;
 }//fin de la méthode calculeCoordonnees
 
 bool Lien::estRelieA(Lien* autreLien)

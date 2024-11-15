@@ -47,7 +47,7 @@ bool XMeaWriter::writeFile(QIODevice *device)
 
 void XMeaWriter::writeEntite(Entite * lEntite)
 {
-    qDebug()<<"void XMeaWriter::writeEntite(Entite * lEntite)"<<endl;
+    qDebug()<<"void XMeaWriter::writeEntite(Entite * lEntite)"<<Qt::endl;
     writeStartElement("entity");
     writeAttribute("name",lEntite->nomEntite);
     writeAttribute("left",QString::number(lEntite->x()));
@@ -78,7 +78,7 @@ void XMeaWriter::writeEntite(Entite * lEntite)
 }
 void XMeaWriter::writeEntites()
 {
-    qDebug()<<"void XMeaWriter::writeEntites()"<<endl;
+    qDebug()<<"void XMeaWriter::writeEntites()"<<Qt::endl;
     writeStartElement("entities");
     QVector<Entite*> vectE=mum->vectTable;
     foreach(Entite* lEntite,vectE)
@@ -89,7 +89,7 @@ void XMeaWriter::writeEntites()
 }
 void XMeaWriter::writeLien(Lien * leLien)
 {
-    qDebug()<<"void XMeaWriter::writeLien(Lien * leLien)"<<endl;
+    qDebug()<<"void XMeaWriter::writeLien(Lien * leLien)"<<Qt::endl;
     writeStartElement("link");
     writeAttribute("t1",leLien->t1->nomEntite);
     writeAttribute("t2",leLien->t2->nomEntite);
@@ -108,7 +108,7 @@ void XMeaWriter::writeLien(Lien * leLien)
 }
 void XMeaWriter::writeLiens()
 {
-    qDebug()<<"void XMeaWriter::writeLiens()"<<endl;
+    qDebug()<<"void XMeaWriter::writeLiens()"<<Qt::endl;
     writeStartElement("links");
     QVector<Lien*> vectL=mum->vectLiens;
     foreach(Lien* leLien,vectL)

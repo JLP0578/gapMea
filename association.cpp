@@ -95,7 +95,7 @@ void Association::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
 
 void Association::setRoundedRect(const QRectF rect, const double radius_x, const double radius_y)
 {
-    qDebug()<<"void Association::setRoundedRect(const QRectF rect, const double radius_x, const double radius_y)"<<endl;
+    qDebug()<<"void Association::setRoundedRect(const QRectF rect, const double radius_x, const double radius_y)"<<Qt::endl;
   this->setRect(rect);
   this->setRadiusX(radius_x);
   this->setRadiusY(radius_y);
@@ -103,7 +103,7 @@ void Association::setRoundedRect(const QRectF rect, const double radius_x, const
 
 QVector <Entite*> Association::vectEntitesAssociees()
 {
-    qDebug()<<"QVector <Entite*> Association::vectEntitesAssociees()"<<endl;
+    qDebug()<<"QVector <Entite*> Association::vectEntitesAssociees()"<<Qt::endl;
     QVector <Entite*> resultat;
     foreach (Lien* leLien, vectLiens) {
         if(leLien->t2==this && leLien->typeDeJointure==LEG)
@@ -115,7 +115,7 @@ QVector <Entite*> Association::vectEntitesAssociees()
 }
 QVector < QPair <Entite*,QString> > Association::vectEntitesRolesAssociees()
 {
-    qDebug()<<"QVector <Entite*> Association::vectEntitesAssociees()"<<endl;
+    qDebug()<<"QVector <Entite*> Association::vectEntitesAssociees()"<<Qt::endl;
     QVector < QPair <Entite*,QString> > resultat;
     foreach (Lien* leLien, vectLiens) {
         if(leLien->t2==this && leLien->typeDeJointure==LEG)

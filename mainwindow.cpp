@@ -82,7 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
      connect(ui->lineEditTaille,SIGNAL(textChanged(QString)),this,SLOT(activeDesactiveBoutonApply()));
       connect(ui->comboBoxPropertyType,SIGNAL(currentTextChanged(QString)),this,SLOT(activeDesactiveBoutonApply()));
       connect(ui->comboBoxPropertyType,SIGNAL(currentTextChanged(QString)),this,SLOT(activeDesactiveInputTaille()));
-     setFileName(tr("New_Model.mea"));
+     QFileInfo fi(tr("New_Model.mea"));
      setSaved(true);
      ui->actionSaveAs->setEnabled(true);
      ui->action_Imprimer->setEnabled(true);
@@ -151,7 +151,7 @@ void MainWindow::on_action_Add_Entity_triggered()
 }
 void MainWindow::ajouteTable(Entite * lEntite)
 {
-    qDebug()<<"void MainWindow::ajouteTable(Entite * lEntite)"<<endl;
+    qDebug()<<"void MainWindow::ajouteTable(Entite * lEntite)"<<Qt::endl;
     vectTable.append(lEntite);
     ui->listWidgetObjects->addItem(lEntite);
     prochainX=lEntite->pos().x()+lEntite->boundingRect().width()+10;
@@ -184,7 +184,7 @@ void MainWindow::setFileName(QFileInfo fn)
 }
 void MainWindow::selectionne(Entite* lEntite)
 {
-    qDebug()<<"void MainWindow::selectionne(Entite* lEntite)"<<endl;
+    qDebug()<<"void MainWindow::selectionne(Entite* lEntite)"<<Qt::endl;
     //selection dans la liste des objets
     ui->listWidgetObjects->setCurrentItem(lEntite);
     //on fait comme si l'utilisateur l'avait sélectionné à la main dans la liste
@@ -322,7 +322,7 @@ void MainWindow::on_pushButtonModifyProperty_clicked()
 
 void MainWindow::on_pushButtonAddProperty_clicked()
 {
-    qDebug()<<"void MainWindow::on_pushButtonAddProperty_clicked()"<<endl;
+    qDebug()<<"void MainWindow::on_pushButtonAddProperty_clicked()"<<Qt::endl;
     //ajout de propriété à l'entité en cours d'édition
     //s'il y a une entité sélectionnée
     if(ui->listWidgetObjects->selectedItems().count()==1)
@@ -703,7 +703,7 @@ void MainWindow::on_action_sql_triggered(bool checked)
 
 Entite *MainWindow::getEntiteByName(QString nom)
 {
-    qDebug()<<"Entite *MainWindow::getEntiteByName(QString nom)"<<endl;
+    qDebug()<<"Entite *MainWindow::getEntiteByName(QString nom)"<<Qt::endl;
     int no=0;
     while(!(no==vectTable.size()|| vectTable.at(no)->nomEntite==nom))
     {
@@ -784,7 +784,7 @@ void MainWindow::on_actionNew_Document_triggered()
     }
     //nouveau document
     effaceTout();
-    setFileName(tr("New_Model.mea"));
+    QFileInfo fi(tr("New_Model.mea"));
     setSaved(true);
     //vider le sql
     ui->textEditSql->clear();
@@ -828,7 +828,7 @@ void MainWindow::activeDesactiveBoutonApply()
 }
 void MainWindow::activeDesactiveInputTaille()
 {
-    qDebug()<<"void MainWindow::activeDesactiveInputTaille()"<<endl;
+    qDebug()<<"void MainWindow::activeDesactiveInputTaille()"<<Qt::endl;
     QString typ=ui->comboBoxPropertyType->currentText();
     bool active= typ=="VARCHAR"|| typ=="NUMERIC" ||typ=="SET" || typ== "ENUM";
     ui->lineEditTaille->setEnabled(active);
